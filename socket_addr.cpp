@@ -60,6 +60,9 @@ class Socket_addr
         void get_address(void)
         {
             std::cout << address.ss_family << ' ' << AF_INET6 << std::endl;
+            struct sockaddr_in *address_4;
+            address_4 = (struct sockaddr_in *)&address;
+            std::cout << address_4->sin_port << ' ' << htons(80) << std::endl;
         }
 };
 
