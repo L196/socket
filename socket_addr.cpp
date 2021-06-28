@@ -42,6 +42,7 @@ class Socket_addr
                     //address.sin_addr.s_addr = INADDR_ANY;
                     //inet_aton(addr, &address_4->sin_addr);
                     inet_pton(AF_INET, addr, &address_4->sin_addr);
+                    std::cout << address_4->sin_addr.s_addr << std::endl;
                     break;
 
                 case AF_INET6:
@@ -59,10 +60,11 @@ class Socket_addr
 
         void get_address(void)
         {
-            std::cout << address.ss_family << ' ' << AF_INET6 << std::endl;
+            std::cout << address.ss_family << ' ' << AF_INET << std::endl;
             struct sockaddr_in *address_4;
             address_4 = (struct sockaddr_in *)&address;
             std::cout << address_4->sin_port << ' ' << htons(80) << std::endl;
+            std::cout << address_4->sin_addr.s_addr << std::endl;
         }
 };
 
@@ -70,7 +72,7 @@ int main(void)
 {
     Socket_addr a;
 
-    a = a.set_address("127.0.0.1", 80, AF_INET6);
+    a = a.set_address("127.0.0.1", 80, AF_INET);
     a.get_address();
 
     return 0;
